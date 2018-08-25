@@ -59,13 +59,19 @@ namespace FrontierTests
         {
             var auxiliaryMenu = new AuxiliaryNavigationMenu(driver);
             var businessPage = auxiliaryMenu.GoToBusinessPage();
+            Assert.IsTrue(driver.Title.Contains("Business"), "Incorrect page title!");
             businessPage.GoBackClickingOnLogo();
+
             var existingCustomersPage = auxiliaryMenu.GoToExistingCustomersPage();
+            Assert.IsTrue(driver.Title.Contains("Customer Service"), "Incorrect page title!");
             existingCustomersPage.GoBackClickingOnLogo();
+
             var myAccountPage = auxiliaryMenu.GoToMyAccountPage();
+            Assert.IsTrue(driver.Title.Contains("Sign Into"), "Incorrect page title!");
             driver.Navigate().Back();
+
             var espanolPage = auxiliaryMenu.GoToEspanolPage();
-            driver.Navigate().Back();
+            Assert.IsTrue(driver.Title.Contains("Español"), "Incorrect page title!");
         }
 
         [Description("This test covers TC4 functionality: verifies that user is able to scroll down to the footer and still see header section since its position remains fixed")]
