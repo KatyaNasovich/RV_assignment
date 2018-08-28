@@ -55,7 +55,7 @@ namespace FrontierTests
         #region Tests
 
         [Description("This test covers TC1 and TC5 functionality: verifies that user is able to click through all links located at the very top of the header - auxiliary navigation menu - then go back by clicking browser arrow or Frontier logo.")]
-        [Category("AuxiliaryMenuLinks")]
+        [Category("Navigation")]
         [Test]
         public void CheckLinksOnAuxiliaryNavigationMenu()
         {
@@ -77,7 +77,7 @@ namespace FrontierTests
         }
 
 
-        [Description("This test covers TC3 except steps 3: re-deirect is coverd in previous tests, works same here. Test verifies drop-downs on top nav menu appear on mouse hover and links in them are clickable.")]
+        [Description("This test covers TC3 except steps 3: re-direct is coverd in previous tests, works same here. Test verifies that drop-downs on top nav menu appear on mouse hover and links are clickable.")]
         [Category("Navigation")]
         [Test]
         public void VerifyTopMenuDropDownsAppearOnMouseHover()
@@ -87,7 +87,7 @@ namespace FrontierTests
         }
 
 
-        [Description("This test covers TC4: checks that Shop Online button is activated on hover - changes its color.")]
+        [Description("This test covers TC4: checks that 'Shop Online' button is activated on hover - changes its color.")]
         [Category("General")]
         [Test]
         public void VerifyShopButtonIsActivatedOnHover()
@@ -98,7 +98,7 @@ namespace FrontierTests
 
 
         [Description("This test covers TC6 functionality: verifies that user is able to scroll down to the footer and still see header section since its position remains fixed.")]
-        [Category("AuxiliaryMenuLinks")]
+        [Category("General")]
         [Test]
         public void VerifyHeaderIsVisibleWhenScrolling()
         {
@@ -107,7 +107,7 @@ namespace FrontierTests
         }
 
 
-        [Description("This test covers T7 functionality: verifies that sections with phone numbers have links which prompt a user to call a number while clicking on these links. In this test do not click on links, sice its implemetation depends on device/browser settings.")]
+        [Description("This test covers T7 functionality: verifies that sections with phone numbers have links prompting a user to call a number. Clicking on links and calling functionality is not covered in this test, since its implemetation depends on device/browser settings.")]
         [Category("Calling")]
         [Test]
         public void VerifyPhoneLinksPresenceInSections()
@@ -121,7 +121,7 @@ namespace FrontierTests
         }
 
 
-        [Description("This test covers TC8 but step 2 functionality: verifies that all legal information are displayed (annotations/disclaimers/term, etc.) and user is able to click to 'legal' links on the footer")]
+        [Description("This test covers TC8 BUT Step 2 functionality: verifies that all legal information is displayed (annotations/disclaimers/terms, etc.) and user is able to click 'legal' links on the footer.")]
         [Category("Legal")]
         [Test]
         public void VerifyLegalInformationPresence()
@@ -142,7 +142,7 @@ namespace FrontierTests
         }
 
 
-        [Description("This test covers TC8 Step 2: checks that annotation sign near the price on the left has a corresponding disclaimer in footer section")]
+        [Description("This test covers TC8 Step 2: checks that annotation sign near the price on the top left has a corresponding disclaimer in footer section.")]
         [Category("Legal")]
         [Test]
         public void VerifyLegalDisclaimersOnLandingPage()
@@ -152,7 +152,7 @@ namespace FrontierTests
         }
 
 
-        [Description("This test covers TC10 functionality: verifies that user is able to view services/shop by clicking on services/products shopping links")]
+        [Description("This test covers TC10 functionality: verifies that user is able to view services and shop by clicking on services/products links.")]
         [Category("Services/Shopping")]
         [Test]
         public void VerifyServicesAndProductsLinks()
@@ -177,7 +177,7 @@ namespace FrontierTests
         }
 
 
-        [Description("This test covers TC11 and verifies address checker functionslity.")]
+        [Description("This test covers TC11 and verifies 'address checker' functionslity.")]
         [Category("Services/Shopping")]
         [Test]
         public void VerifyAddressChecker()
@@ -188,7 +188,7 @@ namespace FrontierTests
             Assert.IsTrue(plansPricingByLocationPage.GetLocationTextValue().Contains(zipToCheck), "Page displays available plans for incorrect location.");
             driver.Navigate().Back();
            
-            Assert.IsTrue(addressCheckSection.VerifyErrorsAppearOnBlankSubmission(), "Error message does not appear if trying to submit without entering ZIP code!");
+            Assert.IsTrue(addressCheckSection.VerifyErrorsAppearOnBlankSubmission(), "Error message does not appear when trying to check available products without entering ZIP code!");
         }
 
         #endregion
