@@ -30,6 +30,9 @@ namespace FrontierPages.Pages
         private const string LocatorWirelessServices = "//a[contains(text(), 'Wireless Services')]";
         private const string LocatorFiOsTv = "//a[contains(text(), 'FiOS TV')]";
         private const string LocatorVantageTv = "//a[contains(text(), 'Vantage TV')]";
+        private readonly List<string> xpathListForPlansPricingDropDownLinks = new List<string>(new string[] { LocatorAllPlans, LocatorBundles, LocatorFiOsBundles });
+        private readonly List<string> xpathListForInternetDropDownLinks = new List<string>(new string[] { LocatorHighSpeedInternet, LocatorFiOsInternet, LocatorWirelessServices });
+        private readonly List<string> xpathListForTvDropDownLinks = new List<string>(new string[] { LocatorFiOsTv, LocatorVantageTv });
 
         #endregion
 
@@ -38,44 +41,22 @@ namespace FrontierPages.Pages
 
         public void CheckDropDownAppearOnHover()
         {
-            CheckDropDownLinksPresenceForPlansPricing();
-            CheckDropDownLinksPresenceForInternet();
-            CheckDropDownLinksPresenceForTv();
+            CheckDropDownLinksPresence(LocatorPlansPricing, xpathListForPlansPricingDropDownLinks);
+            CheckDropDownLinksPresence(LocatorInternet, xpathListForInternetDropDownLinks);
+            CheckDropDownLinksPresence(LocatorTv, xpathListForTvDropDownLinks);
         }
 
-        private void CheckDropDownLinksPresenceForPlansPricing()
+        private void CheckDropDownLinksPresence(string locator, List<string> xpathForLinks)
         {
-            var elementPlansPricing = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorPlansPricing)));
+            var elementPlansPricing = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(locator)));
 
             Actions action = new Actions(driver);
             action.MoveToElement(elementPlansPricing).Perform();
 
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(LocatorAllPlans)));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(LocatorBundles)));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(LocatorFiOsBundles)));
-        }
-
-        private void CheckDropDownLinksPresenceForInternet()
-        {
-            var elementInternet= wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorInternet)));
-
-            Actions action = new Actions(driver);
-            action.MoveToElement(elementInternet).Perform();
-
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(LocatorHighSpeedInternet)));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(LocatorFiOsInternet)));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(LocatorWirelessServices)));
-        }
-
-        private void CheckDropDownLinksPresenceForTv()
-        {
-            var elementTv = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorTv)));
-
-            Actions action = new Actions(driver);
-            action.MoveToElement(elementTv).Perform();
-
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(LocatorFiOsTv)));
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(LocatorVantageTv)));
+            foreach (var item in xpathForLinks)
+            {
+                wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(item)));
+            }
         }
 
         public bool CheckShopButtonColor()
