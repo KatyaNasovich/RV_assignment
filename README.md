@@ -17,9 +17,9 @@ Please follow these steps to review the assignment:
 
 * Test Summary tab provides information about Conditions/Assumptions, discovered issues, and automated test coverage (shows            corresponding automated tests for each test case from Functional Test Cases tab).
 * Functional Test Cases tab contains actual test cases. Some columns are blank or marked as TBD/TBC: my goal is to show how testing efforts might be expanded if necessary.
-* UI_UX Testing Checklist tab includes steps to perform for UI and usability testing. I tried to show a "light" version of test suite that might be used if project deadline is close.
+* UI_UX Testing Checklist tab includes steps for UI and usability testing. I tried to show a "light" version of test suite that might be used if project deadline is close.
 
-3. Please review FrontierTestingProjectForRV.sln located in code folder.
+3. Please review FrontierTestingProjectForRV.sln located in Code folder.
 
 ## Description of FrontierTestingProjectForRV.sln
 
@@ -32,7 +32,7 @@ Each test has [Description("...")] attribute which provides a brief description 
 
 Frontier Pages:
 
-* Project is created based on Page Object pattern: each class contains page specific methods and locators for web elements. There are some empty classes that had to be created to show expandability.
+* Project is created based on Page Object pattern: each class contains page specific methods and locators for web elements. There are some empty classes that had to be created to show project expandability.
 BasePage.cs aggregates methods common for all pages.
 
 ## Prerequisites to run Frontier Tests
