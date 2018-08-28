@@ -52,7 +52,9 @@ namespace FrontierTests
 
         #endregion
 
-        [Description("This test covers TC1 and TC3 functionality: verifies that user is able to click through all links located at the very top of the header - auxiliary navigation menu - then go back by clicking browser arrow or Frontier logo")]
+        #region Tests
+
+        [Description("This test covers TC1 and TC5 functionality: verifies that user is able to click through all links located at the very top of the header - auxiliary navigation menu - then go back by clicking browser arrow or Frontier logo.")]
         [Category("AuxiliaryMenuLinks")]
         [Test]
         public void CheckLinksOnAuxiliaryNavigationMenu()
@@ -74,7 +76,28 @@ namespace FrontierTests
             Assert.IsTrue(driver.Title.Contains("Español"), "Incorrect page title!");
         }
 
-        [Description("This test covers TC4 functionality: verifies that user is able to scroll down to the footer and still see header section since its position remains fixed")]
+
+        [Description("This test covers TC3 except steps 3: re-deirect is coverd in previous tests, works same here. Test verifies drop-downs on top nav menu appear on mouse hover and links in them are clickable.")]
+        [Category("Navigation")]
+        [Test]
+        public void VerifyTopMenuDropDownsAppearOnMouseHover()
+        {
+            var mainNavMenu = new MainNavigationMenu(driver);
+            mainNavMenu.CheckDropDownAppearOnHover();
+        }
+
+
+        [Description("This test covers TC4: checks that Shop Online button is activated on hover - changes its color.")]
+        [Category("General")]
+        [Test]
+        public void VerifyShopButtonIsActivatedOnHover()
+        {
+            var mainNavMenu = new MainNavigationMenu(driver);
+            Assert.IsTrue(mainNavMenu.CheckShopButtonColor(), "Shop Online button color remains the same on hover.");
+        }
+
+
+        [Description("This test covers TC6 functionality: verifies that user is able to scroll down to the footer and still see header section since its position remains fixed.")]
         [Category("AuxiliaryMenuLinks")]
         [Test]
         public void VerifyHeaderIsVisibleWhenScrolling()
@@ -83,8 +106,9 @@ namespace FrontierTests
             landingPage.VerifyScrollingToFooter();
         }
 
-        [Description("This test covers TC5 functionality: verifies that sections with phone numbers have links which prompt a user to call a number while clicking on these links.")]
-        [Category("General")]
+
+        [Description("This test covers T7 functionality: verifies that sections with phone numbers have links which prompt a user to call a number while clicking on these links. In this test do not click on links, sice its implemetation depends on device/browser settings.")]
+        [Category("Calling")]
         [Test]
         public void VerifyPhoneLinksPresenceInSections()
         {
@@ -96,7 +120,8 @@ namespace FrontierTests
             Assert.AreEqual(bannerSection.GetValueFromPhoneLinkOnBanner(), mastFootRedSection.GetValueFromLinkOnFootSection());
         }
 
-        [Description("This test covers TC6 and TC7 step 5 functionality: verifies that all legal information are displayed (annotations/disclaimers/term, etc.) and user is able to click to 'legal' links on the footer")]
+
+        [Description("This test covers TC8 but step 2 functionality: verifies that all legal information are displayed (annotations/disclaimers/term, etc.) and user is able to click to 'legal' links on the footer")]
         [Category("Legal")]
         [Test]
         public void VerifyLegalInformationPresence()
@@ -104,7 +129,6 @@ namespace FrontierTests
             var landingPage = new LandingPage(driver);
             Assert.IsTrue(landingPage.VerifyLogoPresence(), "Frontier logo is not displayed on home page!");
 
-            landingPage.VerifyScrollingToFooter();
             var footer = new Footer(driver);
             Assert.IsTrue(footer.VerifyCopyrightSignPresence(), "Frontier copyright sing is not displayed!");
 
@@ -115,40 +139,58 @@ namespace FrontierTests
             driver.Navigate().Back();
 
             var accessibilityPage = footer.GoToAccessibilityPage();
-            driver.Navigate().Back();
         }
 
-        
-        [Description("This test covers TC8 functionality: verifies that user is able to view services/shop by clicking on services/products shopping links")]
+
+        [Description("This test covers TC8 Step 2: checks that annotation sign near the price on the left has a corresponding disclaimer in footer section")]
+        [Category("Legal")]
+        [Test]
+        public void VerifyLegalDisclaimersOnLandingPage()
+        {
+            var landingPage = new LandingPage(driver);
+            landingPage.VerifyDisclaimers();
+        }
+
+
+        [Description("This test covers TC10 functionality: verifies that user is able to view services/shop by clicking on services/products shopping links")]
         [Category("Services/Shopping")]
         [Test]
         public void VerifyServicesAndProductsLinks()
         {
             var landingPage = new LandingPage(driver);
-            landingPage.ScrollToProductsOfferingsSection();
 
             var productsOfferingsSection = new ProductsOfferingsSection(driver);
             var internetServicePage = productsOfferingsSection.GoToInternetServicePage();
+            Assert.IsTrue(driver.Title.Contains("Internet"), "Incorrect page title!");
             driver.Navigate().Back();
 
             var phoneServicePage = productsOfferingsSection.GoToPhoneServicePage();
+            Assert.IsTrue(driver.Title.Contains("Phone"), "Incorrect page title!");
             driver.Navigate().Back();
 
             var tvServicePage = productsOfferingsSection.GoToTvServicePage();
+            Assert.IsTrue(driver.Title.Contains("TV"), "Incorrect page title!");
             driver.Navigate().Back();
 
             var bundlesPage = productsOfferingsSection.GoToBundlesPage();
-            driver.Navigate().Back();
+            Assert.IsTrue(driver.Title.Contains("Bundles"), "Incorrect page title!");
         }
 
 
-        [Description("This test covers TC2 functionality (except steps 3 and 4 - re-deirect is coverd in previous tests, works the same here): verifies drop-downs on top nav menu appear on mouse hover event")]
+        [Description("This test covers TC11 and verifies address checker functionslity.")]
         [Category("Services/Shopping")]
         [Test]
-        public void VerifyTopMenuDropDownsAppearOnMouseHover()
+        public void VerifyAddressChecker()
         {
-            var mainNavMenu = new MainNavigationMenu(driver);
-            mainNavMenu.CheckDropDownAppearOnHover();
+            var addressCheckSection = new AddressCheckSection(driver);
+            string zipToCheck = "60610";
+            var plansPricingByLocationPage = addressCheckSection.ShowPlansByLocation(zipToCheck);
+            Assert.IsTrue(plansPricingByLocationPage.GetLocationTextValue().Contains(zipToCheck), "Page displays available plans for incorrect location.");
+            driver.Navigate().Back();
+           
+            Assert.IsTrue(addressCheckSection.VerifyErrorsAppearOnBlankSubmission(), "Error message does not appear if trying to submit without entering ZIP code!");
         }
+
+        #endregion
     }
 }

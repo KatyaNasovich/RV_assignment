@@ -9,7 +9,7 @@ namespace FrontierPages.Pages
         {
         }
 
-        #region String values for locators
+        #region Locators values
 
         private const string LocatorBusiness = "(//nav[@class= 'nav-aux']//a[contains(text(), 'Business')])[1]";
         private const string LocatorExistingCustomers = "(//nav[@class= 'nav-aux']//a[contains(text(), 'Customers')])[1]";
