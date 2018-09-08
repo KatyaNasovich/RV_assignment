@@ -31,7 +31,11 @@ namespace FrontierTests
                     driver = new InternetExplorerDriver();
                     break;
                 case "Firefox":
-                    driver = new FirefoxDriver();
+                    // Configure Firefox to work with insecure sites (internet.frontier.com is detected as such)
+                    var options = new FirefoxOptions();
+                    options.AcceptInsecureCertificates = true;
+
+                    driver = new FirefoxDriver(options);
                     break;
                 default:
                     throw new ArgumentException($"Unsupported browser '{browser}'!");
@@ -187,7 +191,7 @@ namespace FrontierTests
             var plansPricingByLocationPage = addressCheckSection.ShowPlansByLocation(zipToCheck);
             Assert.IsTrue(plansPricingByLocationPage.GetLocationTextValue().Contains(zipToCheck), "Page displays available plans for incorrect location.");
             driver.Navigate().Back();
-           
+        
             Assert.IsTrue(addressCheckSection.VerifyErrorsAppearOnBlankSubmission(), "Error message does not appear when trying to check available products without entering ZIP code!");
         }
 
