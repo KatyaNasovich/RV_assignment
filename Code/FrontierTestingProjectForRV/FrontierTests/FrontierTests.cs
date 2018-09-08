@@ -134,7 +134,7 @@ namespace FrontierTests
             Assert.IsTrue(landingPage.VerifyLogoPresence(), "Frontier logo is not displayed on home page!");
 
             var footer = new Footer(driver);
-            Assert.IsTrue(footer.VerifyCopyrightSignPresence(), "Frontier copyright sing is not displayed!");
+            Assert.IsTrue(footer.VerifyCopyrightSignPresence(), "Frontier copyright sign is not displayed!");
 
             var privacyPolicyPage = footer.GoToPrivacyPolicyPage();
             driver.Navigate().Back();
