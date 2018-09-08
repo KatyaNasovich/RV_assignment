@@ -22,6 +22,15 @@ namespace FrontierTests
         [SetUp]
         public void BeforeEachTest()
         {
+            InitalizeBrowser();
+
+            SetWindowSize();
+
+            driver.Navigate().GoToUrl(baseURL);
+        }
+
+        private void InitalizeBrowser()
+        {
             switch (browser)
             {
                 case "Chrome":
@@ -40,9 +49,24 @@ namespace FrontierTests
                 default:
                     throw new ArgumentException($"Unsupported browser '{browser}'!");
             }
+        }
 
-            driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl(baseURL);
+        private void SetWindowSize()
+        {
+            if (Boolean.Parse(ConfigurationManager.AppSettings["maximize-window"]))
+            {
+                driver.Manage().Window.Maximize();
+            }
+            else
+            {
+                var viewportSetting = ConfigurationManager.AppSettings["viewport-size"];
+                if (viewportSetting == null)
+                {
+                    throw new ConfigurationErrorsException("Setting 'viewport-size' must be specified if 'maximize-window' is false!");
+                }
+                var sizes = viewportSetting.Split(',');
+                driver.Manage().Window.Size = new System.Drawing.Size(Int32.Parse(sizes[0]), Int32.Parse(sizes[1]));
+            }
         }
 
         [TearDown]
