@@ -26,9 +26,10 @@ namespace FrontierPages.Pages
         private const string LocatorWirelessServices = "//a[contains(text(), 'Wireless Services')]";
         private const string LocatorFiOsTv = "//a[contains(text(), 'FiOS TV')]";
         private const string LocatorVantageTv = "//a[contains(text(), 'Vantage TV')]";
-        private readonly List<string> xpathListForPlansPricingDropDownLinks = new List<string>(new string[] { LocatorAllPlans, LocatorBundles, LocatorFiOsBundles });
-        private readonly List<string> xpathListForInternetDropDownLinks = new List<string>(new string[] { LocatorHighSpeedInternet, LocatorFiOsInternet, LocatorWirelessServices });
-        private readonly List<string> xpathListForTvDropDownLinks = new List<string>(new string[] { LocatorFiOsTv, LocatorVantageTv });
+
+        private readonly static List<string> xpathListForPlansPricingDropDownLinks = new List<string> { LocatorAllPlans, LocatorBundles, LocatorFiOsBundles };
+        private readonly static List<string> xpathListForInternetDropDownLinks = new List<string> { LocatorHighSpeedInternet, LocatorFiOsInternet, LocatorWirelessServices };
+        private readonly static List<string> xpathListForTvDropDownLinks = new List<string> { LocatorFiOsTv, LocatorVantageTv };
 
         #endregion
 
@@ -44,23 +45,23 @@ namespace FrontierPages.Pages
 
         private void CheckDropDownLinksPresence(string locator, List<string> xpathForLinks)
         {
-            var elementPlansPricing = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(locator)));
+            var elementPlansPricing = Driver.FindElement(By.XPath(locator));
 
-            Actions action = new Actions(driver);
+            Actions action = new Actions(Driver);
             action.MoveToElement(elementPlansPricing).Perform();
-
+           
             foreach (var item in xpathForLinks)
             {
-                wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(item)));
+                Wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath(item)));
             }
         }
 
         public bool CheckShopButtonColor()
         {
-            string shopOnlineButtonDefaultColor = driver.FindElement(By.CssSelector("a#js-track-nav-shop-online")).GetCssValue("color");
-            Actions action = new Actions(driver);
-            action.MoveToElement(driver.FindElement(By.CssSelector("a#js-track-nav-shop-online"))).Perform();
-            var shopOnlineButton = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("a#js-track-nav-shop-online")));
+            string shopOnlineButtonDefaultColor = Driver.FindElement(By.CssSelector("a#js-track-nav-shop-online")).GetCssValue("color");
+            Actions action = new Actions(Driver);
+            action.MoveToElement(Driver.FindElement(By.CssSelector("a#js-track-nav-shop-online"))).Perform();
+            var shopOnlineButton = Wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("a#js-track-nav-shop-online")));
             string shopOnlineButtonActivatedColor = shopOnlineButton.GetCssValue("color");
 
             if (shopOnlineButtonDefaultColor == shopOnlineButtonActivatedColor)

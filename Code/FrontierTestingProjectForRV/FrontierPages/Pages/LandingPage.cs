@@ -11,17 +11,17 @@ namespace FrontierPages.Pages
 
         public void VerifyScrollingToFooter()
         {
-            var footer = driver.FindElement(By.ClassName("mastfoot"));
+            var footer = Driver.FindElement(By.ClassName("mastfoot"));
             ScrollToElement(footer);
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("nav-legal__copyright")));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("masthead")));
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("nav-legal__copyright")));
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("masthead")));
         }
 
         public bool VerifyLogoPresence()
         {
             try
             {
-                if (!(driver.FindElement(By.ClassName("masthead__logo")).Displayed))
+                if (!(Driver.FindElement(By.ClassName("masthead__logo")).Displayed))
                 {
                     return false;
                 }
@@ -35,7 +35,7 @@ namespace FrontierPages.Pages
 
         public void ScrollToProductsOfferingsSection()
         {
-            var productsOfferingsSection = driver.FindElement(By.CssSelector("section.section--products-cta"));
+            var productsOfferingsSection = Driver.FindElement(By.CssSelector("section.section--products-cta"));
             ScrollToElement(productsOfferingsSection);
         }
     }

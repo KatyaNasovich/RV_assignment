@@ -5,10 +5,7 @@ namespace FrontierPages.Pages
 {
     public class ProductsOfferingsSection : BasePage
     {
-        private const string LocatorInternet = "a#js-track-home-shop-internet";
-        private const string LocatorTvService = "a#js-track-home-shop-tv";
-        private const string LocatorPhoneService = "a#js-track-home-shop-plans";
-        private const string LocatorBundlesService = "a#js-track-home-shop-bundles";
+        private const string LocatorTemplateItem = "a#js-track-home-shop-{0}";
 
         public ProductsOfferingsSection(IWebDriver driver) : base(driver)
         {
@@ -16,26 +13,26 @@ namespace FrontierPages.Pages
 
         public InternetServicePage GoToInternetServicePage()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorInternet))).Click();
-            return new InternetServicePage(driver);
+            Driver.FindElement(By.CssSelector(string.Format(LocatorTemplateItem, "internet"))).Click();
+            return new InternetServicePage(Driver);
         }
 
         public TvServicePage GoToTvServicePage()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorTvService))).Click();
-            return new TvServicePage(driver);
+            Driver.FindElement(By.CssSelector(string.Format(LocatorTemplateItem, "tv"))).Click();
+            return new TvServicePage(Driver);
         }
 
         public PhoneServicePage GoToPhoneServicePage()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorPhoneService))).Click();
-            return new PhoneServicePage(driver);
+            Driver.FindElement(By.CssSelector(string.Format(LocatorTemplateItem, "plans"))).Click();
+            return new PhoneServicePage(Driver);
         }
 
         public BundlesPage GoToBundlesPage()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorBundlesService))).Click();
-            return new BundlesPage(driver);
+            Driver.FindElement(By.CssSelector(string.Format(LocatorTemplateItem, "bundles"))).Click();
+            return new BundlesPage(Driver);
         }
     }
 }

@@ -24,8 +24,7 @@ namespace FrontierPages.Pages
 
         public string GetLocationTextValue()
         {
-            var currentLocationElement = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorCurrentLocationByZip)));
-            return currentLocationElement.Text;
+            return Wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorCurrentLocationByZip))).Text;
         }
 
         #endregion

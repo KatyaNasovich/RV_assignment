@@ -11,7 +11,7 @@ namespace FrontierPages.Pages
 
         public string GetValueFromPhoneLinkOnBanner()
         {
-            return wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='banner__container']//a"))).GetAttribute("href");
+            return Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='banner__container']//a"))).GetAttribute("href");
         }
     }
 }

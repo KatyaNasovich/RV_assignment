@@ -23,18 +23,18 @@ namespace FrontierPages.Pages
 
         public PlansPricingByLocationPage ShowPlansByLocation(string zipCode)
         {
-            var inputField = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorZipInputField)));
+            var inputField = Driver.FindElement(By.XPath(LocatorZipInputField));
             inputField.SendKeys(zipCode + Keys.Enter);
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorCurrentLocation)));
-            return new PlansPricingByLocationPage(driver);
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorCurrentLocation)));
+            return new PlansPricingByLocationPage(Driver);
         }
 
         public bool VerifyErrorsAppearOnBlankSubmission()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorZipInputField))).Clear();
-            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorButtonCheckAvailability))).Click();
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorZipInputField))).Clear();
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(LocatorButtonCheckAvailability))).Click();
 
-            if (!driver.FindElement(By.XPath(LocatorErrorMessage)).Displayed)
+            if (!Driver.FindElement(By.XPath(LocatorErrorMessage)).Displayed)
             {
                 return false;
             }

@@ -11,7 +11,7 @@ namespace FrontierPages.Pages
 
         public string GetValueFromPhoneLinkOnAdSection()
         {
-            return wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.link-phone.show-for-large-up a"))).GetAttribute("href");
+            return Wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.link-phone.show-for-large-up a"))).GetAttribute("href");
         }
     }
 }

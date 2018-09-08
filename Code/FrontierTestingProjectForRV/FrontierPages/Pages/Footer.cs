@@ -26,7 +26,7 @@ namespace FrontierPages.Pages
         {
             try
             {
-                if (!(driver.FindElement(By.ClassName("nav-legal__copyright")).Displayed))
+                if (!(Driver.FindElement(By.ClassName("nav-legal__copyright")).Displayed))
                 {
                     return false;
                 }
@@ -40,29 +40,29 @@ namespace FrontierPages.Pages
 
         public PrivacyPolicyPage GoToPrivacyPolicyPage()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorPrivacyPolicy))).Click();
+            Driver.FindElement(By.XPath(LocatorPrivacyPolicy)).Click();
 
             // verification that correct page appears
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorPrivacyPolicyHeadline)));
-            return new PrivacyPolicyPage(driver);
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorPrivacyPolicyHeadline)));
+            return new PrivacyPolicyPage(Driver);
         }
 
         public TermsConditionsPage GoToTermsConditionsPage()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorTermsConditionsLink))).Click();
+            Driver.FindElement(By.XPath(LocatorTermsConditionsLink)).Click();
 
             // verification that correct page appears
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorTermsConditionsHeadline)));
-            return new TermsConditionsPage(driver);
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorTermsConditionsHeadline)));
+            return new TermsConditionsPage(Driver);
         }
 
         public AccessibilityPage GoToAccessibilityPage()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorAccessibility))).Click();
+           Driver.FindElement(By.XPath(LocatorAccessibility)).Click();
 
             // verification that correct page appears
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorAccessibilityHeadline)));
-            return new AccessibilityPage(driver);
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorAccessibilityHeadline)));
+            return new AccessibilityPage(Driver);
         }
 
         #endregion

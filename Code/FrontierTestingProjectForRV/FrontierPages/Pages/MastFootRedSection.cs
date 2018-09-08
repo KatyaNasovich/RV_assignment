@@ -11,7 +11,7 @@ namespace FrontierPages.Pages
 
         public string GetValueFromLinkOnFootSection()
         {
-            return wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.section--mastfoot__phone a"))).GetAttribute("href");
+            return Wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.section--mastfoot__phone a"))).GetAttribute("href");
         }
     }
 }
