@@ -120,6 +120,10 @@ namespace FrontierTests
         [Test]
         public void VerifyShopButtonIsActivatedOnHover()
         {
+            if (driver.Manage().Window.Size.Width <= 640)
+            {
+                Assert.Ignore("'Shop Online' button is not shown for screen widths of 640 and under.");
+            }
             var mainNavMenu = new MainNavigationMenu(driver);
             Assert.IsTrue(mainNavMenu.CheckShopButtonColor(), "Shop Online button color remains the same on hover.");
         }
