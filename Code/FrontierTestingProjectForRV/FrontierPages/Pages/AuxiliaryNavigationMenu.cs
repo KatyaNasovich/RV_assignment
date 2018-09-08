@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-
+using SeleniumExtras.WaitHelpers;
 
 namespace FrontierPages.Pages
 {
@@ -66,7 +66,7 @@ namespace FrontierPages.Pages
             {
                 // Mobile option
                 hamburgerMenu.Click();
-                Driver.FindElement(By.XPath(string.Format(LocatorTemplateMenuItemMobile, menuItemText))).Click();
+                Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(string.Format(LocatorTemplateMenuItemMobile, menuItemText)))).Click();
             }
         }
         #endregion
