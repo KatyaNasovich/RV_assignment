@@ -11,33 +11,63 @@ namespace FrontierPages.Pages
 
         #region Locators values
 
-        private const string LocatorTemplateMenuItem = "//div[@class = 'show-for-medium-up']//nav[@class= 'nav-aux']//a[contains(text(), '{0}')]";
+        private const string LocatorTemplateMenuItemDesktop = "//div[@class = 'show-for-medium-up']//nav[@class= 'nav-aux']//a[contains(text(), '{0}')]";
+        private const string LocatorTemplateMenuItemMobile = "//div[@class = 'hide-for-medium-up']//nav[@class= 'nav-aux']//a[contains(text(), '{0}')]";
+        private const string LocatorHamburgerMenu = ".masthead__menu.js-menu-toggle";
 
         #endregion
 
         #region Methods
         public BusinessPage GoToBusinessPage()
         {
-            Driver.FindElement(By.XPath(string.Format(LocatorTemplateMenuItem, "Business"))).Click();
+            GoToMenuItem("Business");
             return new BusinessPage(Driver);
         }
 
         public ExistingCustomersPage GoToExistingCustomersPage()
         {
-            Driver.FindElement(By.XPath(string.Format(LocatorTemplateMenuItem, "Customers"))).Click();
+            GoToMenuItem("Customers");
             return new ExistingCustomersPage(Driver);
         }
 
         public MyAccountPage GoToMyAccountPage()
         {
-            Driver.FindElement(By.XPath(string.Format(LocatorTemplateMenuItem, "Account"))).Click();
+            GoToMenuItem("Account");
             return new MyAccountPage(Driver);
         }
 
         public EspanolPage GoToEspanolPage()
         {
-            Driver.FindElement(By.XPath(string.Format(LocatorTemplateMenuItem, "Espanol"))).Click();
+            GoToMenuItem("Espanol");
             return new EspanolPage(Driver);
+        }
+
+        private void GoToMenuItem(string menuItemText)
+        {
+            IWebElement hamburgerMenu = null;
+            try
+            {
+                hamburgerMenu = Driver.FindElement(By.CssSelector(LocatorHamburgerMenu));
+                if (!hamburgerMenu.Displayed)
+                {
+                    hamburgerMenu = null;
+                }
+            }
+            catch (NoSuchElementException)
+            {
+            }
+
+            if (hamburgerMenu == null)
+            {
+                // Desktop option
+                Driver.FindElement(By.XPath(string.Format(LocatorTemplateMenuItemDesktop, menuItemText))).Click();
+            }
+            else
+            {
+                // Mobile option
+                hamburgerMenu.Click();
+                Driver.FindElement(By.XPath(string.Format(LocatorTemplateMenuItemMobile, menuItemText))).Click();
+            }
         }
         #endregion
     }
