@@ -11,7 +11,13 @@ namespace FrontierPages.Pages
 
         public string GetValueFromPhoneLinkOnBanner()
         {
-            return Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='banner__container']//a"))).GetAttribute("href");
+            var phoneNumberOnHeader = Driver.FindElement(By.XPath("//span[@class='masthead__phone-wrap']//a"));
+            if (phoneNumberOnHeader.Displayed)
+            {
+                return phoneNumberOnHeader.GetAttribute("href");
+            }
+
+            return Driver.FindElement(By.XPath("//div[@class='banner__container']//a")).GetAttribute("href");
         }
     }
 }

@@ -11,7 +11,12 @@ namespace FrontierPages.Pages
 
         public string GetValueFromLinkOnFootSection()
         {
-            return Wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("div.section--mastfoot__phone a"))).GetAttribute("href");
+            var phoneNumberOnSmall = Driver.FindElement(By.CssSelector("a.section--mastfoot__button__phone"));
+            if (phoneNumberOnSmall.Displayed)
+            {
+                return phoneNumberOnSmall.GetAttribute("href");
+            }
+            return Driver.FindElement(By.CssSelector("div.section--mastfoot__phone a")).GetAttribute("href");
         }
     }
 }
