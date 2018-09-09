@@ -6,6 +6,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Firefox;
 using System.Configuration;
 using FrontierPages.Pages;
+using System.Drawing;
 
 namespace FrontierTests
 {
@@ -65,7 +66,7 @@ namespace FrontierTests
                     throw new ConfigurationErrorsException("Setting 'viewport-size' must be specified if 'maximize-window' is false!");
                 }
                 var sizes = viewportSetting.Split(',');
-                driver.Manage().Window.Size = new System.Drawing.Size(Int32.Parse(sizes[0]), Int32.Parse(sizes[1]));
+                driver.Manage().Window.Size = new Size(Int32.Parse(sizes[0]), Int32.Parse(sizes[1]));
             }
         }
 
@@ -125,6 +126,7 @@ namespace FrontierTests
             var mainNavMenu = new MainNavigationMenu(driver);
             Assert.IsTrue(mainNavMenu.CheckShopButtonColor(), "Shop Online button color remains the same on hover.");
         }
+
 
         [Description("This test covers TC6 functionality: verifies that user is able to scroll down to the footer and still see header section since its position remains fixed.")]
         [Category("General")]

@@ -14,6 +14,7 @@ namespace FrontierPages.Pages
         private const string LocatorPrivacyPolicy = "//ul[@class='nav-legal__links']//a[contains(text(), 'Privacy')]";
         private const string LocatorTermsConditionsLink = "//ul[@class='nav-legal__links']//a[contains(text(), 'Terms')]";
         private const string LocatorAccessibility = "//ul[@class='nav-legal__links']//a[contains(text(), 'Accessibility')]";
+
         private const string LocatorPrivacyPolicyHeadline = "//h1[contains(text(), 'Privacy')]";
         private const string LocatorTermsConditionsHeadline = "//h1[contains(text(), 'Terms')]";
         private const string LocatorAccessibilityHeadline = "//h1[contains(text(), 'Accessibility')]";
