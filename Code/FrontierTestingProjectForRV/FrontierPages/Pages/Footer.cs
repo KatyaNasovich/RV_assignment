@@ -11,11 +11,11 @@ namespace FrontierPages.Pages
 
         #region Locators
 
-        private const string LocatorPrivacyPolicy = "//ul[@class='nav-legal__links']//a[contains(text(), 'Privacy')]";
+        private const string LocatorTemplateForFooterLinks = "//ul[@class='nav-legal__links']//a[contains(text(), '{0}')]";
         private const string LocatorTermsConditionsLink = "//ul[@class='nav-legal__links']//a[contains(text(), 'Terms')]";
         private const string LocatorAccessibility = "//ul[@class='nav-legal__links']//a[contains(text(), 'Accessibility')]";
 
-        private const string LocatorPrivacyPolicyHeadline = "//h1[contains(text(), 'Privacy')]";
+        private const string LocatorTemplateForHeadline = "//h1[contains(text(), '{0}')]";
         private const string LocatorTermsConditionsHeadline = "//h1[contains(text(), 'Terms')]";
         private const string LocatorAccessibilityHeadline = "//h1[contains(text(), 'Accessibility')]";
 
@@ -41,28 +41,28 @@ namespace FrontierPages.Pages
 
         public PrivacyPolicyPage GoToPrivacyPolicyPage()
         {
-            Driver.FindElement(By.XPath(LocatorPrivacyPolicy)).Click();
+            Driver.FindElement(By.XPath(string.Format(LocatorTemplateForFooterLinks, "Privacy"))).Click();
 
             // verification that correct page appears
-            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorPrivacyPolicyHeadline)));
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(string.Format(LocatorTemplateForHeadline, "Privacy"))));
             return new PrivacyPolicyPage(Driver);
         }
 
         public TermsConditionsPage GoToTermsConditionsPage()
         {
-            Driver.FindElement(By.XPath(LocatorTermsConditionsLink)).Click();
+            Driver.FindElement(By.XPath(string.Format(LocatorTemplateForFooterLinks, "Terms"))).Click();
 
             // verification that correct page appears
-            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorTermsConditionsHeadline)));
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(string.Format(LocatorTemplateForHeadline, "Terms"))));
             return new TermsConditionsPage(Driver);
         }
 
         public AccessibilityPage GoToAccessibilityPage()
         {
-           Driver.FindElement(By.XPath(LocatorAccessibility)).Click();
+           Driver.FindElement(By.XPath(string.Format(LocatorTemplateForFooterLinks, "Accessibility"))).Click();
 
             // verification that correct page appears
-            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(LocatorAccessibilityHeadline)));
+            Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(string.Format(LocatorTemplateForHeadline, "Accessibility"))));
             return new AccessibilityPage(Driver);
         }
 
